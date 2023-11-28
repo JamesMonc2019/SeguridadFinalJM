@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SeguridadFinalJM.Entidades
 {
-    public class tarjeta
+    public class Tarjeta
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,6 +18,5 @@ namespace SeguridadFinalJM.Entidades
         public string shatarjeta { get; set; } = string.Empty;
         [Required]
         public string encryptedtarjeta { get; set; } = string.Empty;
-
     }
 }

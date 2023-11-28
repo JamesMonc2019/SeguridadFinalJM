@@ -8,7 +8,7 @@ namespace SeguridadFinalJM.Utilerias
     {
         public AutoMapperProfiles()
         {
-            CreateMap<TarjetaDtoCreate, tarjeta>();
+            CreateMap<TarjetaDtoCreate, Tarjeta>();
         }
     }
 }

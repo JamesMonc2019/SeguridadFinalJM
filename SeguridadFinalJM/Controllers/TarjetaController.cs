@@ -26,32 +26,19 @@ namespace SeguridadFinalJM.Controllers
         }
        
 
-        [HttpGet]
-        public async Task<ActionResult<List<tarjeta>>> Get()
-        {
-            try
-            {
-                var list = await context.tarjeta.ToListAsync();
-                return Ok(list);
-            }
-            catch (Exception)
-            {
-
-                return BadRequest("Se presento un error en tu solicitud");
-            }
-        }
+  
 
         [HttpPost]
-        public async Task<ActionResult<tarjeta>> Post([FromBody] TarjetaDtoCreate dtoCreate)
+        public  ActionResult<Tarjeta> Post([FromBody] TarjetaDtoCreate dtoCreate)
         {
             try
             {
-                var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Keyaes"]));
+                var llave =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Keyaes"]));
 
                 string salt = llave.ToString() + dtoCreate.plastico;
                 string esSha = new Utilerias.Utils().MuestraSha(salt);
 
-                byte[] plasticoEncriptado = new Utils().Encrypt(dtoCreate.plastico);
+                byte[] plasticoEncriptado =  new Utils().Encrypt(dtoCreate.plastico);
                 string plasticoDesencriptado = new Utils().Decrypt(plasticoEncriptado);
                 string esShaDecrypt = new Utilerias.Utils().MuestraSha(llave.ToString() + plasticoDesencriptado);
 
@@ -64,9 +51,9 @@ namespace SeguridadFinalJM.Controllers
                 dtoCreate.shatarjeta = esSha;
                 dtoCreate.plastico = tarjet;
                 dtoCreate.encryptedtarjeta = Convert.ToBase64String(plasticoEncriptado);
-                var tar = mapper.Map<tarjeta>(dtoCreate);
-                context.Add(tar);
-                await context.SaveChangesAsync();
+                var tar =  mapper.Map<Tarjeta>(dtoCreate);
+                ///context.Add(tar); //await context.SaveChangesAsync();
+
                 return tar; 
             }
             catch (Exception)

@@ -5,9 +5,9 @@ namespace SeguridadFinalJM
 {
     public class DatabaseContext:DbContext
     {
-        public DatabaseContext(DbContextOptions options) : base(options) { }
+        public DatabaseContext(DbContextOptions options) : base(options)  { }
        
        
-        public DbSet<tarjeta> tarjeta { get; set; }
+        public DbSet<Tarjeta>? Tarjeta { get; set; } 
     }
 }
